@@ -1,13 +1,20 @@
 cmake_minimum_required(VERSION 3.0)
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 
-project(fundex)
+set(PROJECT_NAME fundex)
+project(${PROJECT_NAME})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE})
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+
+set(FUNDEX_DB_ORM_LIBRARY "fundex-db-orm-lib")
+set(FUNDEX_DB_ORM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/db)
+add_subdirectory(src/db)
 
 add_subdirectory(src)
 add_subdirectory(tests)

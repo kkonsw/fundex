@@ -1,6 +1,7 @@
-set(target fundex)
+set(target ${PROJECT_NAME})
 
 FILE(GLOB hdrs "*.h")
-FILE(GLOB srcs "*.cc")
+FILE(GLOB srcs "*.cpp")
 
 add_executable(${target} ${hdrs} ${srcs})
+target_link_libraries(${target} ${FUNDEX_DB_ORM_LIBRARY})

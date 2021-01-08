@@ -2,7 +2,9 @@
 
 #include <iostream>
 
+#include "db/db_manager.h"
+
 int main(int argc, char *argv[]) {
-    std::cout << "Hello, world!" << std::endl;
+    fundex::DBManager db_manager;
     return 0;
 }
