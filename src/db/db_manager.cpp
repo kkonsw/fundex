@@ -6,8 +6,9 @@
 
 namespace fundex {
 
-DBManager::DBManager() {
-    std::cout << "From DBManager" << std::endl;
+DBManager::DBManager():
+    db(std::make_unique<Database>(init_storage())) {
+    db->sync_schema();
 }
 
 };

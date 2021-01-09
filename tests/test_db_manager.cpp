@@ -3,6 +3,6 @@
 #include "catch.hpp"
 #include "db/db_manager.h"
 
-TEST_CASE("Get database from db manager", "[DBManager]") {
+TEST_CASE("Create DB manager", "[DBManager]") {
     REQUIRE_NOTHROW(fundex::DBManager());
 }
