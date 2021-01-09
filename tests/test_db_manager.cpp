@@ -5,7 +5,29 @@
 #include "catch.hpp"
 #include "db/db_manager.h"
 
-TEST_CASE("Get Database from DBManager", "[DBManager]") {
-    std::string db_name = "test_db.sqlite";
-    REQUIRE_NOTHROW(fundex::DBManager::getDatabase(db_name));
+class DBManagerFixture {
+ public:
+    DBManagerFixture():
+        db_name("test_db.sqlite"),
+        db(fundex::DBManager::getDatabase(db_name)) {
+        }
+
+ protected:
+    std::string db_name;
+    fundex::Database* db;
+};
+
+TEST_CASE_METHOD(DBManagerFixture, "Sync Database schema",
+        "[DBManager]") {
+    REQUIRE_NOTHROW(db->sync_schema());
+}
+
+TEST_CASE_METHOD(DBManagerFixture, "Get table names from Database",
+        "[DBManager]") {
+    auto tables = db->table_names();
+    std::sort(tables.begin(), tables.end());
+    REQUIRE(tables.size() == 3);
+    REQUIRE(tables[0] == "categories");
+    REQUIRE(tables[1] == "sqlite_sequence");
+    REQUIRE(tables[2] == "subcategories");
 }
