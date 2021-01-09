@@ -5,6 +5,6 @@
 #include "db/db_manager.h"
 
 int main(int argc, char *argv[]) {
-    fundex::DBManager db_manager;
+    auto db = fundex::DBManager::getDatabase();
     return 0;
 }

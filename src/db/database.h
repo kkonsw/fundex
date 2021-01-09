@@ -9,21 +9,22 @@
 
 namespace fundex {
 
-/** Represents transactions category in database.
+/** Represents transaction's category in database.
   *
   */
 struct Category {
-    int id;
-    std::string cat_name;
+    int id;  ///< Category ID in database
+    std::string cat_name;  ///< Category name
 };
 
-/** Represents transactions subcategory in database.
+/** Represents transaction's subcategory in database.
   *
   */
 struct Subcategory {
-    int id;
+    int id;  ///< Subcategory ID in database
     std::unique_ptr<int> cat_id;
-    std::string subcat_name;
+    ///< Category ID that this Subcategory belongs to
+    std::string subcat_name;  ///< Subcategory name
 };
 
 /** Represents database schema.
