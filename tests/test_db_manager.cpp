@@ -2,14 +2,14 @@
 
 #include <string>
 
-#include "catch.hpp"
+#include <catch2/catch.hpp>
 #include "db/db_manager.h"
 
 class DBManagerFixture {
  public:
     DBManagerFixture():
         db_name("test_db.sqlite"),
-        db(fundex::DBManager::getDatabase(db_name)) {
+        db(fundex::DBManager::get_database(db_name)) {
         }
 
  protected:

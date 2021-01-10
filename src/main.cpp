@@ -2,19 +2,14 @@
 
 #include <iostream>
 
-#include "CLI11.hpp"
+#include <CLI11/CLI11.hpp>
 
 #include "db/db_manager.h"
+#include "cli/subcommand_show.h"
 
 int main(int argc, char *argv[]) {
     CLI::App app{"fundex - CLI expense tracker"};
-
-    // define options
-    int p = 0;
-    app.add_option("-p", p, "Parameter");
-
+    fundex::setup_option_p(&app);
     CLI11_PARSE(app, argc, argv);
-
-    std::cout << "Parameter value: " << p << std::endl;
     return 0;
 }

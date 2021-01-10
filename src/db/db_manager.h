@@ -9,7 +9,7 @@
 #include <memory>
 #include <string>
 
-#include "database.h"
+#include "db/database.h"
 
 namespace fundex {
 
@@ -24,12 +24,12 @@ class DBManager {
        * when this function is called the first time.
        * \returns Pointer to Database Storage.
        */
-     static Database* getDatabase(const std::string& db_name = "db.sqlite");
+     static Database* get_database(const std::string& db_name = "db.sqlite");
 
  private:
     explicit DBManager(const std::string& db_name = "db.sqlite");
     std::unique_ptr<Database> db;
-    Database* getDB();
+    Database* get_db();
 };
 
 };  // namespace fundex

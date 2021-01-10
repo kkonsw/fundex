@@ -1,6 +1,6 @@
 // Copyright 2021 Kuznetsov Konstantin
 
-#include "db_manager.h"
+#include "db/db_manager.h"
 
 #include <iostream>
 
@@ -11,12 +11,12 @@ DBManager::DBManager(const std::string& db_name):
     db->sync_schema();
 }
 
-Database * DBManager::getDatabase(const std::string& db_name) {
+Database * DBManager::get_database(const std::string& db_name) {
     static DBManager manager(db_name);
-    return manager.getDB();
+    return manager.get_db();
 }
 
-Database *DBManager::getDB() {
+Database *DBManager::get_db() {
     return db.get();
 }
 

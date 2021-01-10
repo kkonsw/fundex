@@ -6,10 +6,10 @@
 #ifndef SRC_DB_DATABASE_H_
 #define SRC_DB_DATABASE_H_
 
+#include <sqlite_orm/sqlite_orm.h>
+
 #include <memory>
 #include <string>
-
-#include "sqlite_orm.h"
 
 namespace fundex {
 
