@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]) {
     CLI::App app{"fundex - CLI expense tracker"};
-    fundex::setup_option_p(&app);
+    fundex::setup_subcommand_show(&app);
     CLI11_PARSE(app, argc, argv);
     return 0;
 }
