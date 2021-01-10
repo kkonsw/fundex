@@ -4,4 +4,4 @@ FILE(GLOB hdrs "*.h")
 FILE(GLOB srcs "*.cpp")
 
 add_executable(${target} ${hdrs} ${srcs})
-target_link_libraries(${target} ${FUNDEX_DB_ORM_LIBRARY})
+target_link_libraries(${target} ${FUNDEX_DB_ORM_LIBRARY} CLI11)

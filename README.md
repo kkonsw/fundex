@@ -1,11 +1,9 @@
-# Fundex
+# CLI Expense Tracker
 
-CLI Expense Tracker
-
-# Database
+### Database
 
 ...
 
-# ER Diagram
+### ER Diagram
 
 ...

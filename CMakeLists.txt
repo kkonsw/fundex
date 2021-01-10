@@ -16,5 +16,9 @@ set(FUNDEX_DB_ORM_LIBRARY "fundex-db-orm-lib")
 set(FUNDEX_DB_ORM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/db)
 add_subdirectory(src/db)
 
+set(CLI11_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/3rdparty/CLI11)
+add_library(CLI11 INTERFACE)
+target_include_directories(CLI11 INTERFACE ${CLI11_INCLUDE_DIR})
+
 add_subdirectory(src)
 add_subdirectory(tests)
