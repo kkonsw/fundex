@@ -28,5 +28,8 @@ set(FUNDEX_CLI_LIBRARY "fundex-cli-lib")
 set(FUNDEX_CLI_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/cli)
 add_subdirectory(src/cli)
 
+# libfort
+add_subdirectory(3rdparty/fort)
+
 add_subdirectory(src)
 add_subdirectory(tests)
