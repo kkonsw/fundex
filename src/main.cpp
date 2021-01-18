@@ -6,10 +6,12 @@
 
 #include "db/db_data.h"
 #include "cli/flags.h"
+#include "cli/subcommand_add.h"
 
 int main(int argc, char *argv[]) {
     CLI::App app{"fundex - CLI expense tracker"};
     fundex::setup_flags(&app);
+    fundex::setup_subcommand_add(&app);
     CLI11_PARSE(app, argc, argv);
     return 0;
 }

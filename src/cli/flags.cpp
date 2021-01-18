@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-/* #include <libfort/lib/fort.hpp> */
 #include <fort/fort.hpp>
 
 #include "cli/flags.h"
