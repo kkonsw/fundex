@@ -29,20 +29,6 @@ struct SubcommandAddOptions {
   */
 void setup_subcommand_add(CLI::App *app);
 
-/** Function that runs code after Add subcommand is issued.
-  * \param opt Subcommand Add options values.
-  */
-void run_subcommand_add(const SubcommandAddOptions& opt);
-
-/** Creates new Transaction from subcommand Add options.
-  * \param opt Subcommand Add options values.
-  * \param transaction Pointer to new Transaction
-  * \returns true, if new Transaction was created successfully,
-  * false otherwise.
-  */
-static bool setup_new_transaction(const SubcommandAddOptions& opt,
-        Transaction *transaction);
-
 };  // namespace fundex
 
 #endif  // SRC_CLI_SUBCOMMAND_ADD_H_

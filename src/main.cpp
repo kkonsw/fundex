@@ -4,7 +4,6 @@
 
 #include <CLI11/CLI11.hpp>
 
-#include "db/db_data.h"
 #include "cli/flags.h"
 #include "cli/subcommand_add.h"
 #include "cli/subcommand_show.h"

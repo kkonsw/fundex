@@ -4,7 +4,6 @@
 
 #include <catch2/catch.hpp>
 
-#include "db/db_data.h"
 #include "db/db_manager.h"
 
 class DatabaseFixture {
@@ -15,8 +14,6 @@ class DatabaseFixture {
         }
 
     ~DatabaseFixture() {
-        // Clear Database
-        db->remove_all<fundex::Category>();
     }
 
  protected:
@@ -38,19 +35,4 @@ TEST_CASE_METHOD(DatabaseFixture, "Get table names from Database",
     REQUIRE(tables[1] == "sqlite_sequence");
     REQUIRE(tables[2] == "subcategories");
     REQUIRE(tables[3] == "transactions");
-}
-
-TEST_CASE_METHOD(DatabaseFixture, "Add categories to Database",
-        "[Database]") {
-    fundex::add_categories();
-    std::vector<std::string> expected = {"Bills", "Food",
-        "Leisure", "Homeneeds", "Transport", "Healthcare", "Miscellaneous"};
-
-    auto categories = db->get_all<fundex::Category>();
-    REQUIRE(categories.size() == expected.size());
-
-    for (size_t i = 0; i < categories.size(); ++i) {
-        auto cat = categories[i];
-        REQUIRE(cat.cat_name == expected[i]);
-    }
 }

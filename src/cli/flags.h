@@ -31,11 +31,6 @@ struct CLIFlags {
   */
 void setup_flags(CLI::App *app);
 
-/** Callback function for `--list-cat` flag.
-  * This function prints all categories with ids.
-  */
-void list_categories();
-
 };  // namespace fundex
 
 #endif  // SRC_CLI_FLAGS_H_

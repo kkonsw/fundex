@@ -10,12 +10,10 @@
 
 namespace fundex {
 
-void setup_flags(CLI::App *app) {
-    app->add_flag_callback("--list_cat", list_categories,
-            "List all Categories");
-}
-
-void list_categories() {
+/** Callback function for `--list-cat` flag.
+  * This function prints all categories with ids.
+  */
+static void list_categories() {
     auto db = DBManager::get_database();
     fort::char_table table;
     table << fort::header << "ID" << "Category" << fort::endr;
@@ -26,6 +24,11 @@ void list_categories() {
     }
 
     std::cout << table.to_string() << std::endl;
+}
+
+void setup_flags(CLI::App *app) {
+    app->add_flag_callback("--list_cat", list_categories,
+            "List all Categories");
 }
 
 };  // namespace fundex

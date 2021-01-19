@@ -25,11 +25,6 @@ struct SubcommandShowOptions {
   */
 void setup_subcommand_show(CLI::App *app);
 
-/** Function that runs code after Show subcommand is issued.
-  *
-  */
-void run_subcommand_show(const SubcommandShowOptions& opt);
-
 };  // namespace fundex
 
 #endif  // SRC_CLI_SUBCOMMAND_SHOW_H_

@@ -11,14 +11,10 @@
 
 namespace fundex {
 
-void setup_subcommand_show(CLI::App *app) {
-    auto opt = std::make_shared<SubcommandShowOptions>();
-    auto sub = app->add_subcommand("show", "Show Transactions");
-    sub->add_option("-n", opt->num_records, "Number of records to show");
-    sub->callback([opt]() { run_subcommand_show(*opt); });
-}
-
-void run_subcommand_show(const SubcommandShowOptions& opt) {
+/** Function that runs code after Show subcommand is issued.
+ *
+ */
+static void run_subcommand_show(const SubcommandShowOptions& opt) {
     // get last transactions
     int n = opt.num_records;
     auto db = DBManager::get_database();
@@ -40,6 +36,13 @@ void run_subcommand_show(const SubcommandShowOptions& opt) {
         table << fort::endr;
     }
     std::cout << table.to_string() << std::endl;
+}
+
+void setup_subcommand_show(CLI::App *app) {
+    auto opt = std::make_shared<SubcommandShowOptions>();
+    auto sub = app->add_subcommand("show", "Show Transactions");
+    sub->add_option("-n", opt->num_records, "Number of records to show");
+    sub->callback([opt]() { run_subcommand_show(*opt); });
 }
 
 };  // namespace fundex
