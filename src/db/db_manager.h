@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file db_manager.h
  * Header for DBManager class.
  */
+
 #ifndef SRC_DB_DB_MANAGER_H_
 #define SRC_DB_DB_MANAGER_H_
 

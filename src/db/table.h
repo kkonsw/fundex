@@ -1,7 +1,7 @@
 // Copyright 2021 Kuznetsov Konstantin
 /**
  * @file table.h
- * This file defines template ORM table.
+ * Header for template ORM table.
  */
 #ifndef SRC_DB_TABLE_H_
 #define SRC_DB_TABLE_H_

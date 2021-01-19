@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file database.h
  * This file defines structs that represent Database records.
  */
+
 #ifndef SRC_DB_DATABASE_H_
 #define SRC_DB_DATABASE_H_
 

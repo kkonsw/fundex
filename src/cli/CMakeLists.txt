@@ -11,4 +11,4 @@ FILE(GLOB hdrs "*.h")
 FILE(GLOB srcs "*.cpp")
 
 add_library(${target} STATIC ${srcs} ${hdrs})
-target_link_libraries(${target} PRIVATE ${FUNDEX_DB_ORM_LIBRARY} CLI11 fort)
+target_link_libraries(${target} PRIVATE ${FUNDEX_DB_ORM_LIBRARY} CLI11)

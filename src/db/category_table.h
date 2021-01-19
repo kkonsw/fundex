@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file category_table.h
- * This file defines ORM for Category table.
+ * Header for Category table ORM.
  */
+
 #ifndef SRC_DB_CATEGORY_TABLE_H_
 #define SRC_DB_CATEGORY_TABLE_H_
 
@@ -11,6 +13,9 @@
 
 namespace fundex {
 
+/** ORM for Category table.
+  *
+  */
 class CategoryTable : public Table<Category> {
  public:
     CategoryTable();

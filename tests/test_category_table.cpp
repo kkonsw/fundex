@@ -4,7 +4,6 @@
 
 #include <catch2/catch.hpp>
 
-#include "db/db_data.h"
 #include "db/category_table.h"
 #include "db/db_manager.h"
 
@@ -27,7 +26,6 @@ class DatabaseFixture {
 
 TEST_CASE_METHOD(DatabaseFixture, "Add categories to Database",
         "[Database]") {
-    fundex::add_categories();
     std::vector<std::string> expected = {"Bills", "Food",
         "Leisure", "Homeneeds", "Transport", "Healthcare", "Miscellaneous"};
 

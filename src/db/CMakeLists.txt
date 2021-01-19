@@ -14,4 +14,4 @@ include_directories(/usr/include)
 link_directories(/usr/lib)
 
 add_library(${target} STATIC ${srcs} ${hdrs})
-target_link_libraries(${target} PRIVATE sqlite_orm sqlite3)
+target_link_libraries(${target} PRIVATE sqlite_orm sqlite3 fort)
