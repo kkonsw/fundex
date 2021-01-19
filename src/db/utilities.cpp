@@ -12,8 +12,7 @@ void print_categories(std::ostream &output) {
     fort::char_table table;
     table << fort::header << "ID" << "Category" << fort::endr;
 
-    CategoryTable categories;
-    for (const auto& cat : categories.get_all()) {
+    for (const auto& cat : CategoryTable().get_all()) {
         table << cat.id << cat.cat_name << fort::endr;
     }
 
@@ -23,16 +22,24 @@ void print_categories(std::ostream &output) {
 void print_transactions(const std::vector<Transaction>& transactions,
         std::ostream &output) {
     fort::char_table table;
-    table << fort::header << "ID" << "Amount" << "Category ID" << fort::endr;
+    table << fort::header << "ID" << "Amount" << "Category" << fort::endr;
+
     for (const auto& transaction : transactions) {
         table << transaction.id << transaction.amount;
+
+        // print transaction category
         if (transaction.cat_id.get() == nullptr) {
-            table << 0;
+            table << "--";
         } else {
-            table << *transaction.cat_id.get();
+            auto id = *transaction.cat_id.get();
+            auto cat = CategoryTable().get(id);
+            if (cat != nullptr) {
+                table << cat->cat_name;
+            }
         }
         table << fort::endr;
     }
+
     output << table.to_string() << std::endl;
 }
 

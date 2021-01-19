@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file subcommand_show.h
  * This file defines options and actions for subcommand Show.
  */
+
 #ifndef SRC_CLI_SUBCOMMAND_SHOW_H_
 #define SRC_CLI_SUBCOMMAND_SHOW_H_
 

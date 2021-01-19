@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file subcommand_add.h
  * This file defines options and actions for subcommand Add.
  */
+
 #ifndef SRC_CLI_SUBCOMMAND_ADD_H_
 #define SRC_CLI_SUBCOMMAND_ADD_H_
 

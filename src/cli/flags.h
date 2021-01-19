@@ -1,10 +1,12 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file flags.h
  * This file defines flags for CLI app.
  * Flags can be passed to program to get specific results.
  * For example, `--list-cat` will output all possible expense categories.
  */
+
 #ifndef SRC_CLI_FLAGS_H_
 #define SRC_CLI_FLAGS_H_
 
@@ -24,6 +26,9 @@ struct CLIFlags {
 
     /// Flag to list all Subcategories.
     bool list_subcat;
+
+    /// Flag to remove all Transactions.
+    bool clear_transactions;
 };
 
 /** Adds flags to program.

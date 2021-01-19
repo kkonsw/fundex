@@ -5,7 +5,8 @@
 #include <memory>
 
 #include "cli/subcommand_add.h"
-#include "db/db_manager.h"
+#include "db/transaction_table.h"
+#include "db/category_table.h"
 
 namespace fundex {
 
@@ -24,13 +25,10 @@ static bool setup_new_transaction(const SubcommandAddOptions& opt,
     transaction->amount = opt.amount;
 
     // setup transaction category
-    auto db = DBManager::get_database();
-    auto category = db->get_all<Category>(sqlite_orm::where(
-                sqlite_orm::c(&Category::id) = opt.cat_id));
-    if (!category.empty()) {
-        // category provided by user
-        auto cat = *category.begin();
-        transaction->cat_id = std::make_unique<int>(cat.id);
+    auto cat_ptr = CategoryTable().get(opt.cat_id);
+    if (cat_ptr != nullptr) {
+        // category provided by user is valid
+        transaction->cat_id = std::make_unique<int>(cat_ptr->id);
     }
 
     return true;
@@ -41,12 +39,10 @@ static bool setup_new_transaction(const SubcommandAddOptions& opt,
   */
 static void run_subcommand_add(const SubcommandAddOptions& opt) {
     // add new transaction to database
-    auto db = DBManager::get_database();
     Transaction transaction;
+    TransactionTable transactions;
     if (setup_new_transaction(opt, &transaction)) {
-        db->insert(transaction);
-        // TODO(fundex): nice message about new transaction
-        std::cout << "Created New Transaction" << std::endl;
+        transactions.add(transaction);
     }
 }
 
