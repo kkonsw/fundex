@@ -16,8 +16,11 @@ namespace fundex {
   *
   */
 struct SubcommandShowOptions {
-    /// Number of records to show
+    /// Number of records to show.
     int num_records;
+
+    /// Flag to show all Transactions.
+    bool all_transactions;
 };
 
 /** Sets up a subcommand and captures a shared_ptr to a struct
