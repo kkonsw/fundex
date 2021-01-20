@@ -1,10 +1,12 @@
 // Copyright 2021 Kuznetsov Konstantin
 
-#include <db/utilities.h>
+#include <ctime>
+#include <iomanip>
 
 #include <fort/fort.hpp>
 
 #include "db/category_table.h"
+#include "db/utilities.h"
 
 namespace fundex {
 
@@ -22,7 +24,8 @@ void print_categories(std::ostream &output) {
 void print_transactions(const std::vector<Transaction>& transactions,
         std::ostream &output) {
     fort::char_table table;
-    table << fort::header << "ID" << "Category" << "Amount" << fort::endr;
+    table << fort::header << "ID" << "Category" << "Date"
+        << "Note" << "Amount" << fort::endr;
 
     int total = 0;
     for (const auto& transaction : transactions) {
@@ -38,6 +41,13 @@ void print_transactions(const std::vector<Transaction>& transactions,
                 table << cat->cat_name;
             }
         }
+
+        // print transaction date
+        std::time_t curr_date = transaction.date;
+        table << std::put_time(std::localtime(&curr_date),
+                "%d %b %Y");
+
+        table << transaction.note;
         total += transaction.amount;
         table << transaction.amount;
         table << fort::endr;
@@ -45,9 +55,9 @@ void print_transactions(const std::vector<Transaction>& transactions,
     table << fort::separator;
 
     // total sum of transactions
-    table << "Total" << "" << total << fort::endr;
+    table << "Total" << "" << "" << "" << total << fort::endr;
     int last_row = transactions.size();
-    table[last_row + 1][0].set_cell_span(2);
+    table[last_row + 1][0].set_cell_span(4);
     table[last_row + 1][0].set_cell_text_align(fort::text_align::right);
 
     output << table.to_string() << std::endl;

@@ -27,7 +27,7 @@ struct Category {
 };
 
 /** Represents Transaction's Subcategory in Database.
-  *
+  * Not supported in current version.
   */
 struct Subcategory {
     /// Subcategory ID in Database
@@ -44,22 +44,22 @@ struct Subcategory {
   *
   */
 struct Transaction {
-    /// Transaction ID in Database
+    /// Transaction ID in Database.
     int id;
 
-    /// Date of Transaction as Unix Time
+    /// Date of Transaction as Unix Time.
     int date;
 
-    /// Transaction amount
+    /// Transaction amount.
     int amount;
 
-    /// Transaction's Category
+    /// Transaction's Category.
     std::unique_ptr<int> cat_id;
 
-    /// Transaction's Subcategory
+    /// Transaction's Subcategory.
     std::unique_ptr<int> subcat_id;
 
-    /// Notes about Transaction
+    /// Notes about Transaction.
     std::string note;
 };
 

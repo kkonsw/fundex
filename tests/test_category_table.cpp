@@ -1,6 +1,7 @@
 // Copyright 2021 Kuznetsov Konstantin
 
 #include <string>
+#include <vector>
 
 #include <catch2/catch.hpp>
 
@@ -10,8 +11,7 @@
 class DatabaseFixture {
  public:
     DatabaseFixture():
-        db_name("test_db.sqlite"),
-        db(fundex::DBManager::get_database(db_name)) {
+        db(fundex::DBManager::get_database("test_db.sqlite")) {
         }
 
     ~DatabaseFixture() {
@@ -19,12 +19,11 @@ class DatabaseFixture {
     }
 
  protected:
-    std::string db_name;
     fundex::Database* db;
     fundex::CategoryTable table;
 };
 
-TEST_CASE_METHOD(DatabaseFixture, "Add categories to Database",
+TEST_CASE_METHOD(DatabaseFixture, "Get categories from Database",
         "[Database]") {
     std::vector<std::string> expected = {"Bills", "Food",
         "Leisure", "Homeneeds", "Transport", "Healthcare", "Miscellaneous"};

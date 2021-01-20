@@ -8,6 +8,8 @@
 #ifndef SRC_CLI_SUBCOMMAND_ADD_H_
 #define SRC_CLI_SUBCOMMAND_ADD_H_
 
+#include <string>
+
 #include <CLI11/CLI11.hpp>
 #include "db/database.h"
 
@@ -22,6 +24,9 @@ struct SubcommandAddOptions {
 
     /// Transaction amount.
     int amount;
+
+    /// Note about Transaction.
+    std::string note;
 };
 
 /** Sets up a subcommand and captures a shared_ptr to a struct

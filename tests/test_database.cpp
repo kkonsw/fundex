@@ -1,7 +1,5 @@
 // Copyright 2021 Kuznetsov Konstantin
 
-#include <string>
-
 #include <catch2/catch.hpp>
 
 #include "db/db_manager.h"
@@ -9,15 +7,13 @@
 class DatabaseFixture {
  public:
     DatabaseFixture():
-        db_name("test_db.sqlite"),
-        db(fundex::DBManager::get_database(db_name)) {
+        db(fundex::DBManager::get_database("test_db.sqlite")) {
         }
 
     ~DatabaseFixture() {
     }
 
  protected:
-    std::string db_name;
     fundex::Database* db;
 };
 

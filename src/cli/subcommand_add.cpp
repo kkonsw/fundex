@@ -1,5 +1,6 @@
 // Copyright 2021 Kuznetsov Konstantin
 
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <memory>
@@ -31,6 +32,11 @@ static bool setup_new_transaction(const SubcommandAddOptions& opt,
         transaction->cat_id = std::make_unique<int>(cat_ptr->id);
     }
 
+    transaction->note = opt.note;
+
+    // current time
+    transaction->date = std::time(nullptr);
+
     return true;
 }
 
@@ -51,6 +57,7 @@ void setup_subcommand_add(CLI::App *app) {
     auto sub = app->add_subcommand("add", "Add new Transactions");
     sub->add_option("-c,--cat", opt->cat_id, "Category ID for new Transaction");
     sub->add_option("amount", opt->amount, "Transaction amount")->required();
+    sub->add_option("-n, --note", opt->note, "Note about Transaction");
     sub->callback([opt]() { run_subcommand_add(*opt); });
 }
 
