@@ -11,7 +11,6 @@
 #include <string>
 
 #include <CLI11/CLI11.hpp>
-#include "db/database.h"
 
 namespace fundex {
 

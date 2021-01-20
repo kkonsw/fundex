@@ -15,15 +15,22 @@
 
 namespace fundex {
 
-/** Prints all categories from database using libfort.
-  * \param output Output stream, cout by default.
-  */
+/**
+ * Prints all categories from database using libfort.
+ *
+ * @param output
+ *   Output stream, cout by default.
+ */
 void print_categories(std::ostream &output = std::cout);
 
-/** Prints transactions using libfort.
-  * \param transactions Transactions to print.
-  * \param output Output stream, cout by default.
-  */
+/**
+ * Prints transactions using libfort.
+ *
+ * @param transactions
+ *   Transactions to print.
+ * @param output
+ *   Output stream, cout by default.
+ */
 void print_transactions(const std::vector<Transaction>& transactions,
         std::ostream &output = std::cout);
 

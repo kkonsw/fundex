@@ -26,9 +26,8 @@ TEST_CASE_METHOD(DatabaseFixture, "Get table names from Database",
         "[Database]") {
     auto tables = db->table_names();
     std::sort(tables.begin(), tables.end());
-    REQUIRE(tables.size() == 4);
+    REQUIRE(tables.size() == 3);
     REQUIRE(tables[0] == "categories");
     REQUIRE(tables[1] == "sqlite_sequence");
-    REQUIRE(tables[2] == "subcategories");
-    REQUIRE(tables[3] == "transactions");
+    REQUIRE(tables[2] == "transactions");
 }
