@@ -11,40 +11,48 @@
 
 namespace fundex {
 
-/** Creates new Transaction from subcommand Add options.
-  * \param opt Subcommand Add options values.
-  * \param transaction Pointer to new Transaction
-  * \returns true, if new Transaction was created successfully,
-  * false otherwise.
-  */
+/**
+ * Creates new Transaction from subcommand Add options.
+ *
+ * @param opt
+ *   Subcommand Add options values.
+ * @param transaction
+ *   Pointer to new Transaction.
+ * @return
+ *   True, if new Transaction was created successfully,
+ *   false otherwise.
+ */
 static bool setup_new_transaction(const SubcommandAddOptions& opt,
         Transaction *transaction) {
     if (opt.amount <= 0) {
-        // user did not provide valid Transaction amount
+        // User did not provide valid Transaction amount
         return false;
     }
     transaction->amount = opt.amount;
 
-    // setup transaction category
+    // Setup transaction category
     auto cat_ptr = CategoryTable().get(opt.cat_id);
     if (cat_ptr != nullptr) {
-        // category provided by user is valid
+        // Category provided by user is valid
         transaction->cat_id = std::make_unique<int>(cat_ptr->id);
     }
 
     transaction->note = opt.note;
 
-    // current time
+    // Current time
     transaction->date = std::time(nullptr);
 
     return true;
 }
 
-/** Function that runs code after Add subcommand is issued.
-  * \param opt Subcommand Add options values.
-  */
+/**
+ * Function that runs code after Add subcommand is issued.
+ *
+ * @param opt
+ *   Subcommand Add options values.
+ */
 static void run_subcommand_add(const SubcommandAddOptions& opt) {
-    // add new transaction to database
+    // Add new transaction to database
     Transaction transaction;
     TransactionTable transactions;
     if (setup_new_transaction(opt, &transaction)) {

@@ -97,6 +97,9 @@ inline auto init_storage(const std::string &path = "db.sqlite") {
                     &Subcategory::id)));
 }
 
+/** Typedef for sqlite_orm storage.
+  *
+  */
 using Database = decltype(init_storage());
 
 };  // namespace fundex

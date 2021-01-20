@@ -1,7 +1,7 @@
 // Copyright 2021 Kuznetsov Konstantin
 /**
  * @file table.h
- * Header for template ORM table.
+ * Header for template ORM for Database tables.
  */
 #ifndef SRC_DB_TABLE_H_
 #define SRC_DB_TABLE_H_
@@ -14,6 +14,9 @@
 
 namespace fundex {
 
+/** Base ORM for Database tables.
+  *
+  */
 template <typename T>
 class Table {
  public:
@@ -53,14 +56,15 @@ class Table {
     /** Id for non-existent record.
      *
      */
-    static const int invalidID = -1;
+    static const int invalid_id = -1;
 
  protected:
+    /// sqlite_orm storage.
     Database* db;
 };
 
 template <typename T>
-const int Table<T>::invalidID;
+const int Table<T>::invalid_id;
 
 template <typename T>
 Table<T>::Table():

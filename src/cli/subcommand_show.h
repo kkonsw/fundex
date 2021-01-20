@@ -12,22 +12,27 @@
 
 namespace fundex {
 
-/** All options for subcommand Show.
-  *
-  */
+/**
+ * All options for subcommand Show.
+ */
 struct SubcommandShowOptions {
-    /// Number of records to show.
+    /**
+     * Number of records to show.
+     */
     int num_records;
 
-    /// Flag to show all Transactions.
+    /**
+     * Flag to show all Transactions.
+     */
     bool all_transactions;
 };
 
-/** Sets up a subcommand and captures a shared_ptr to a struct
-  * that holds all its options. The variables of the struct are
-  * bound to the CLI options. Also sets the run function as callback
-  * to be called when this subcommand is issued.
-  */
+/**
+ * Sets up a subcommand and captures a shared_ptr to a struct
+ * that holds all its options. The variables of the struct are
+ * bound to the CLI options. Also sets the run function as callback
+ * to be called when this subcommand is issued.
+ */
 void setup_subcommand_show(CLI::App *app);
 
 };  // namespace fundex

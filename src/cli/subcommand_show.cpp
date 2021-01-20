@@ -8,18 +8,19 @@
 
 namespace fundex {
 
-/** Function that runs code after Show subcommand is issued.
+/**
+ * Function that runs code after Show subcommand is issued.
  *
  */
 static void run_subcommand_show(const SubcommandShowOptions& opt) {
     TransactionTable transactions;
-    // print all transactions
+    // Print all transactions
     if (opt.all_transactions) {
         print_transactions(transactions.get_all());
         return;
     }
 
-    // print last transactions
+    // Print last transactions
     int n = opt.num_records;
     if (n >= 0) {
         auto last_transactions = transactions.get_last_transactions(n);

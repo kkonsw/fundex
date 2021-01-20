@@ -6,16 +6,18 @@
 
 namespace fundex {
 
-/** Callback function for `--list-cat` flag.
-  *
-  */
+/**
+ * Callback function for `--list-cat` flag.
+ *
+ */
 static void list_categories() {
     print_categories();
 }
 
-/** Callback function for `--clear` flag.
-  *
-  */
+/**
+ * Callback function for `--clear` flag.
+ *
+ */
 static void remove_transactions() {
     TransactionTable transactions;
     transactions.remove_all();

@@ -15,25 +15,32 @@
 
 namespace fundex {
 
-/** All options for subcommand Add.
-  *
-  */
+/**
+ * All options for subcommand Add.
+ */
 struct SubcommandAddOptions {
-    /// Category id.
+    /**
+     * Category id.
+     */
     int cat_id;
 
-    /// Transaction amount.
+    /**
+     * Transaction amount.
+     */
     int amount;
 
-    /// Note about Transaction.
+    /**
+     * Note about Transaction.
+     */
     std::string note;
 };
 
-/** Sets up a subcommand and captures a shared_ptr to a struct
-  * that holds all its options. The variables of the struct are
-  * bound to the CLI options. Also sets the run function as callback
-  * to be called when this subcommand is issued.
-  */
+/**
+ * Sets up a subcommand and captures a shared_ptr to a struct
+ * that holds all its options. The variables of the struct are
+ * bound to the CLI options. Also sets the run function as callback
+ * to be called when this subcommand is issued.
+ */
 void setup_subcommand_add(CLI::App *app);
 
 };  // namespace fundex

@@ -3,6 +3,7 @@
 /**
  * @file flags.h
  * This file defines flags for CLI app.
+ *
  * Flags can be passed to program to get specific results.
  * For example, `--list-cat` will output all possible expense categories.
  */
@@ -16,24 +17,36 @@
 
 namespace fundex {
 
-/** Struct to store flags.
-  * If specific flag is found, bool variable changes to true.
-  * \warning Flags are not stored in current version.
-  */
+/**
+ * Struct to store flags.
+ *
+ * If specific flag is found, bool variable changes to true.
+ *
+ * @warning
+ *   Flags are not stored in current version.
+ */
 struct CLIFlags {
-    /// Flag to list all Categories.
+    /**
+     * Flag to list all Categories.
+     */
     bool list_cat;
 
-    /// Flag to list all Subcategories.
+    /**
+     * Flag to list all Subcategories.
+     */
     bool list_subcat;
 
-    /// Flag to remove all Transactions.
+    /**
+     * Flag to remove all Transactions.
+     */
     bool clear_transactions;
 };
 
-/** Adds flags to program.
-  * If flags are found, callback functions are called.
-  */
+/**
+ * Adds flags to program.
+ *
+ * If flags are found, callback functions are called.
+ */
 void setup_flags(CLI::App *app);
 
 };  // namespace fundex
