@@ -13,9 +13,9 @@
 
 namespace fundex {
 
-/** ORM for Category table.
-  *
-  */
+/**
+ * ORM for Category table.
+ */
 class CategoryTable : public Table<Category> {
  public:
     CategoryTable();

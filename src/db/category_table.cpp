@@ -9,7 +9,7 @@ namespace fundex {
 
 CategoryTable::CategoryTable():
     Table() {
-        // Create test data
+        // Create categories
         if (size() == 0) {
             std::vector<std::string> categories = {
                 "Bills", "Food", "Leisure", "Homeneeds",

@@ -31,7 +31,7 @@ void print_transactions(const std::vector<Transaction>& transactions,
     for (const auto& transaction : transactions) {
         table << transaction.id;
 
-        // print transaction category
+        // Print transaction category
         if (transaction.cat_id.get() == nullptr) {
             table << "-";
         } else {
@@ -42,7 +42,7 @@ void print_transactions(const std::vector<Transaction>& transactions,
             }
         }
 
-        // print transaction date
+        // Print transaction date
         std::time_t curr_date = transaction.date;
         table << std::put_time(std::localtime(&curr_date),
                 "%d %b %Y");
@@ -54,7 +54,7 @@ void print_transactions(const std::vector<Transaction>& transactions,
     }
     table << fort::separator;
 
-    // total sum of transactions
+    // Total sum of transactions
     table << "Total" << "" << "" << "" << total << fort::endr;
     int last_row = transactions.size();
     table[last_row + 1][0].set_cell_span(4);

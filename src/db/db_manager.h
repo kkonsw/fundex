@@ -15,17 +15,23 @@
 
 namespace fundex {
 
-/** DBManager is a singleton that provides access to
-  * Database Storage from sqlite_orm.
-  */
+/**
+ * DBManager is a singleton that provides access to
+ * Database Storage from sqlite_orm.
+ */
 class DBManager {
  public:
-     /** Get Database Storage from static instance of DB Manager.
-       * \param db_name Database name.
-       * \warning Static instance of DB Manager is created
-       * when this function is called the first time.
-       * \returns Pointer to Database Storage.
-       */
+     /**
+      * Get Database Storage from static instance of DB Manager.
+      *
+      * @param db_name
+      *   Database name.
+      * @warning
+      *   Static instance of DB Manager is created
+      *   when this function is called the first time.
+      * @return
+      *   Pointer to Database Storage.
+      */
      static Database* get_database(const std::string& db_name = "db.sqlite");
 
  private:

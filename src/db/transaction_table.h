@@ -15,17 +15,20 @@
 
 namespace fundex {
 
-/** ORM for Transaction table.
-  *
-  */
+/**
+ * ORM for Transaction table.
+ */
 class TransactionTable : public Table<Transaction> {
  public:
     TransactionTable();
     ~TransactionTable();
 
-    /** Function to get last n Transactions from Database.
-      * \param n Number of Transactions.
-      */
+    /**
+     * Function to get last n Transactions from Database.
+     *
+     * @param n
+     *   Number of Transactions.
+     */
     std::vector<Transaction> get_last_transactions(int n) const;
 };
 

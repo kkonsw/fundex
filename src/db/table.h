@@ -1,8 +1,10 @@
 // Copyright 2021 Kuznetsov Konstantin
+
 /**
  * @file table.h
  * Header for template ORM for Database tables.
  */
+
 #ifndef SRC_DB_TABLE_H_
 #define SRC_DB_TABLE_H_
 
@@ -14,52 +16,58 @@
 
 namespace fundex {
 
-/** Base ORM for Database tables.
-  *
-  */
+/**
+ * Base ORM for Database tables.
+ */
 template <typename T>
 class Table {
  public:
     Table();
     virtual ~Table();
 
-    /** Adds row to table.
-     *  \returns ID from Database.
+    /**
+     * Adds row to table.
+     *
+     * @return
+     *   ID from Database.
      */
     virtual int add(const T& row);
 
-    /** Removes row from table.
-     *
+    /**
+     * Removes row from table.
      */
     virtual void remove(int id);
 
-    /** Returns row with requested id from table.
-     *  Returns nullptr if row with requested id is not found.
+    /**
+     * Returns row with requested id from table.
+     * Returns nullptr if row with requested id is not found.
      */
     virtual std::unique_ptr<T> get(int id) const;
 
-    /** Removes all rows from table.
-     *
+    /**
+     * Removes all rows from table.
      */
     virtual void remove_all();
 
-    /** Returns all rows from table.
-     *
+    /**
+     * Returns all rows from table.
      */
     virtual std::vector<T> get_all() const;
 
-    /** Returns table size.
-     *
+    /**
+     * Returns table size.
      */
     virtual std::size_t size() const;
 
-    /** Id for non-existent record.
-     *
+    /**
+     * Id for non-existent record.
      */
     static const int invalid_id = -1;
 
  protected:
-    /// sqlite_orm storage.
+    /**
+     * sqlite_orm storage.
+     */
     Database* db;
 };
 
