@@ -24,7 +24,7 @@ struct SubcommandShowOptions {
     /**
      * Flag to show all Transactions.
      */
-    bool all_transactions;
+    bool show_all;
 };
 
 /**

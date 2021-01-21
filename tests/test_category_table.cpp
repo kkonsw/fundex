@@ -24,7 +24,7 @@ class DatabaseFixture {
 };
 
 TEST_CASE_METHOD(DatabaseFixture, "Get categories from Database",
-        "[Database]") {
+        "[Category Table]") {
     std::vector<std::string> expected = {"Bills", "Food",
         "Leisure", "Homeneeds", "Transport", "Healthcare", "Miscellaneous"};
 

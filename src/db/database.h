@@ -32,29 +32,6 @@ struct Category {
 };
 
 /**
- * Represents Transaction's Subcategory in Database.
- *
- * @warning
- *   Not supported in current version.
- */
-struct Subcategory {
-    /**
-     * Subcategory ID in Database.
-     */
-    int id;
-
-    /**
-     * Category ID that this Subcategory belongs to.
-     */
-    std::unique_ptr<int> cat_id;
-
-    /**
-     * Subcategory name.
-     */
-    std::string subcat_name;
-};
-
-/**
  * Represents Transaction in Database.
  */
 struct Transaction {

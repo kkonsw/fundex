@@ -18,31 +18,6 @@
 namespace fundex {
 
 /**
- * Struct to store flags.
- *
- * If specific flag is found, bool variable changes to true.
- *
- * @warning
- *   Flags are not stored in current version.
- */
-struct CLIFlags {
-    /**
-     * Flag to list all Categories.
-     */
-    bool list_cat;
-
-    /**
-     * Flag to list all Subcategories.
-     */
-    bool list_subcat;
-
-    /**
-     * Flag to remove all Transactions.
-     */
-    bool clear_transactions;
-};
-
-/**
  * Adds flags to program.
  *
  * If flags are found, callback functions are called.

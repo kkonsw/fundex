@@ -15,7 +15,7 @@ namespace fundex {
 static void run_subcommand_show(const SubcommandShowOptions& opt) {
     TransactionTable transactions;
     // Print all transactions
-    if (opt.all_transactions) {
+    if (opt.show_all) {
         print_transactions(transactions.get_all());
         return;
     }
@@ -31,9 +31,9 @@ static void run_subcommand_show(const SubcommandShowOptions& opt) {
 void setup_subcommand_show(CLI::App *app) {
     auto opt = std::make_shared<SubcommandShowOptions>();
     auto sub = app->add_subcommand("show", "Show Transactions");
+    auto flag = sub->add_flag("--all", opt->show_all, "Show all Transactions");
     sub->add_option("-n,--num_records", opt->num_records,
-            "Number of records to show");
-    sub->add_flag("--all", opt->all_transactions, "Show all Transactions");
+            "Number of records to show")->excludes(flag);
     sub->callback([opt]() { run_subcommand_show(*opt); });
 }
 
