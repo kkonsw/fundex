@@ -5,34 +5,18 @@
 
 #include <catch2/catch.hpp>
 
-#include "db/category_table.h"
-#include "db/db_manager.h"
+#include "fixtures.h"
 
-class DatabaseFixture {
- public:
-    DatabaseFixture():
-        db(fundex::DBManager::get_database("test_db.sqlite")) {
-        }
-
-    ~DatabaseFixture() {
-        table.remove_all();
-    }
-
- protected:
-    fundex::Database* db;
-    fundex::CategoryTable table;
-};
-
-TEST_CASE_METHOD(DatabaseFixture, "Get categories from Database",
+TEST_CASE_METHOD(DBFixture, "Get categories from Database",
         "[Category Table]") {
     std::vector<std::string> expected = {"Bills", "Food",
         "Leisure", "Homeneeds", "Transport", "Healthcare", "Miscellaneous"};
 
-    auto categories = table.get_all();
-    REQUIRE(categories.size() == expected.size());
+    auto from_db = categories.get_all();
+    REQUIRE(from_db.size() == expected.size());
 
-    for (size_t i = 0; i < categories.size(); ++i) {
-        auto cat = categories[i];
+    for (size_t i = 0; i < from_db.size(); ++i) {
+        auto cat = from_db[i];
         REQUIRE(cat.cat_name == expected[i]);
     }
 }

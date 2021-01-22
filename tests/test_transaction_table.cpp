@@ -2,37 +2,20 @@
 
 #include <catch2/catch.hpp>
 
-#include "db/transaction_table.h"
-#include "db/db_manager.h"
-#include "db/database.h"
+#include "fixtures.h"
 
-class DatabaseFixture {
- public:
-    DatabaseFixture():
-        db(fundex::DBManager::get_database("test_db.sqlite")) {
-        }
-
-    ~DatabaseFixture() {
-        table.remove_all();
-    }
-
- protected:
-    fundex::Database* db;
-    fundex::TransactionTable table;
-};
-
-TEST_CASE_METHOD(DatabaseFixture, "Get last Transactions from Database",
+TEST_CASE_METHOD(DBFixture, "Get last Transactions from Database",
         "[Transactions Table]") {
     int num_transactions = 10;
     // Create fake Transactions
     for (int i = 1; i <= num_transactions; ++i) {
         fundex::Transaction transaction = {-1, 0, i, nullptr, "test"};
-        table.add(transaction);
+        transactions.add(transaction);
     }
 
     // Retrieve n last Transactions from Database
     size_t n = 5;
-    auto last = table.get_last_transactions(n);
+    auto last = transactions.get_last_transactions(n);
     REQUIRE(last.size() == n);
 
     // Check for correct amount
