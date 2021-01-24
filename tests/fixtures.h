@@ -20,8 +20,8 @@ class DBFixture {
         }
 
     ~DBFixture() {
-        categories.remove_all();
         transactions.remove_all();
+        categories.remove_all();
     }
 
  protected:
@@ -43,14 +43,20 @@ class CLIFixture : public DBFixture {
     int launch_app(std::vector<std::string> args) {
         std::vector<char*> argv;
 
-        // First argument is an App name
-        argv.push_back((char*)"test-app");
-        for (const auto& arg : args) {
-            argv.push_back((char*)arg.data());
+        try {
+            // First argument is an App name
+            argv.push_back((char*)"test-app");
+            for (const auto& arg : args) {
+                argv.push_back((char*)arg.data());
+            }
+            argv.push_back(nullptr);
+            int argc = argv.size() - 1;
+            CLI11_PARSE(app, argc, argv.data());
         }
-        argv.push_back(nullptr);
-        int argc = argv.size() - 1;
-        CLI11_PARSE(app, argc, argv.data());
+        catch (std::exception& e) {
+            std::cout << e.what() << std::endl;
+            return -1;
+        }
 
         return 0;
     }

@@ -24,4 +24,15 @@ CategoryTable::CategoryTable():
 CategoryTable::~CategoryTable() {
 }
 
+int CategoryTable::get_id_from_name(const std::string& name) const {
+    auto categories = db->get_all<Category>(
+            sqlite_orm::where(sqlite_orm::c(&Category::cat_name) = name));
+
+    if (categories.empty()) {
+        return invalid_id;
+    }
+    return categories.begin()->id;
+}
+
+
 }  // namespace fundex

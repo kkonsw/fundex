@@ -20,3 +20,15 @@ TEST_CASE_METHOD(DBFixture, "Get categories from Database",
         REQUIRE(cat.cat_name == expected[i]);
     }
 }
+
+TEST_CASE_METHOD(DBFixture, "Get valid Category's id from name",
+        "[Category Table]") {
+    int id = categories.get_id_from_name("Bills");
+    REQUIRE(id > 0);
+}
+
+TEST_CASE_METHOD(DBFixture, "Get Category's id from invalid name",
+        "[Category Table]") {
+    int id = categories.get_id_from_name("abcd");
+    REQUIRE(id == categories.invalid_id);
+}
