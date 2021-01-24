@@ -1,21 +1,20 @@
 # CLI Expense Tracker
 
-### Database
+Simple CLI Expense Tracker written with C++.
 
-...
+## Dependencies
 
-### ER Diagram
+| lib          | usage                |
+|--------------|----------------------|
+| `sqlite_orm` | ORM                  |
+| `Catch2`     | testing              |
+| `libfort`    | pretty tables        |
+| `CLI11`      | command line parsing |
+
+## Database ER Diagram
 
 ![](ER.png)
 
-### TODO
+## Examples
 
-- New Features
-    - [ ] Subcommand Clear
-    - [ ] Subcommand Stat
-
-- Other
-    - [ ] Utility function to setup all subcommands
-
-- Tests
-    - [ ] Get last Transactions
+...

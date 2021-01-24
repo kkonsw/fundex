@@ -8,6 +8,8 @@
 #ifndef SRC_CLI_SUBCOMMAND_RM_H_
 #define SRC_CLI_SUBCOMMAND_RM_H_
 
+#include <vector>
+
 #include <CLI11/CLI11.hpp>
 
 namespace fundex {
@@ -20,6 +22,11 @@ struct SubcommandRmOptions {
      * Flag to remove all Transactions.
      */
     bool remove_all;
+
+    /**
+     * Structure to store ids for removed Transactions.
+     */
+    std::vector<int> ids;
 };
 
 /**

@@ -8,6 +8,8 @@
 #ifndef SRC_DB_CATEGORY_TABLE_H_
 #define SRC_DB_CATEGORY_TABLE_H_
 
+#include <string>
+
 #include "db/database.h"
 #include "db/table.h"
 

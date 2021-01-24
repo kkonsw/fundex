@@ -47,7 +47,8 @@ TEST_CASE_METHOD(CLIFixture, "Add Transaction with Category",
     int bills_id = categories.get_id_from_name("Bills");
 
     // Add new Transaction to Bills Category
-    std::vector<std::string> args = {"add", "5", "--cat", std::to_string(bills_id)};
+    std::vector<std::string> args = {"add", "5", "--cat",
+        std::to_string(bills_id)};
     launch_app(args);
     REQUIRE(transactions.size() == 1);
 
@@ -60,7 +61,7 @@ TEST_CASE_METHOD(CLIFixture, "Add Transaction with Category",
     REQUIRE(transaction.note == "");
     REQUIRE(transaction.cat_id != nullptr);
 
-    /* // Check correct Category */
+    // Check correct Category
     auto id = *transaction.cat_id.get();
     auto cat = categories.get(id);
     REQUIRE(cat != nullptr);
