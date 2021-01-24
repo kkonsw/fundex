@@ -2,6 +2,8 @@
 
 Simple CLI Expense Tracker written with C++.
 
+*WORK IN PROGRESS*
+
 ## Dependencies
 
 | lib          | usage                |
@@ -10,6 +12,17 @@ Simple CLI Expense Tracker written with C++.
 | `Catch2`     | testing              |
 | `libfort`    | pretty tables        |
 | `CLI11`      | command line parsing |
+
+## Build
+
+`libsqlite3` is required!
+
+```sh
+mkdir build
+cd build
+cmake ..
+make
+```
 
 ## Database ER Diagram
 
