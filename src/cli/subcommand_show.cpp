@@ -16,14 +16,15 @@ static void run_subcommand_show(const SubcommandShowOptions& opt) {
     TransactionTable transactions;
     // Print all transactions
     if (opt.show_all) {
-        print_transactions(transactions.get_all());
+        auto all_transactions = transactions.get_transactions();
+        print_transactions(all_transactions);
         return;
     }
 
-    // Print last transactions
+    // Print last n transactions
     int n = opt.num_records;
     if (n >= 0) {
-        auto last_transactions = transactions.get_last_transactions(n);
+        auto last_transactions = transactions.get_transactions(n);
         print_transactions(last_transactions);
     }
 }
