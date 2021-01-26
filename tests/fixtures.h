@@ -30,6 +30,26 @@ class DBFixture {
     fundex::TransactionTable transactions;
 };
 
+class TransactionsFixture : public DBFixture {
+ public:
+    TransactionsFixture():
+        DBFixture(),
+        num_transactions(5) {
+            // Create fake Transactions
+            for (int i = 1; i <= num_transactions; ++i) {
+                fundex::Transaction transaction = {-1, 0, i, nullptr, "test"};
+                transactions.add(transaction);
+            }
+        }
+
+    ~TransactionsFixture() {
+    }
+
+ protected:
+    int num_transactions;
+};
+
+
 class CLIFixture : public DBFixture {
  public:
     CLIFixture():
