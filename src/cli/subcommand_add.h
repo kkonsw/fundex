@@ -19,12 +19,12 @@ namespace fundex {
  */
 struct SubcommandAddOptions {
     /**
-     * Category id.
+     * Category's id.
      */
     int cat_id;
 
     /**
-     * Transaction amount.
+     * Transaction's amount.
      */
     int amount;
 
@@ -32,6 +32,12 @@ struct SubcommandAddOptions {
      * Note about Transaction.
      */
     std::string note;
+
+    /**
+     * Date of Transaction.
+     * Current supported format is %d/%m/%Y (day/month/year).
+     */
+    std::string date;
 };
 
 /**

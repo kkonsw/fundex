@@ -1,8 +1,11 @@
 // Copyright 2021 Kuznetsov Konstantin
 
+#include <date/date.h>
+
 #include <ctime>
-#include <iostream>
+#include <chrono>
 #include <string>
+#include <sstream>
 #include <memory>
 
 #include "cli/subcommand_add.h"
@@ -10,6 +13,36 @@
 #include "db/category_table.h"
 
 namespace fundex {
+
+/**
+ * This function returns number of seconds since Epoch
+ * for date provided by user. By default, returns today's date.
+ *
+ * @param user_date
+ *   Date provided by user. Current required format is %d/%m/%Y.
+ * @return
+ *   Date as Unix Time (number of seconds since January 1, 1970).
+ */
+int get_date_in_seconds(const std::string& user_date = "") {
+    using namespace date;
+
+    // Get today's date in seconds
+    auto today_days = floor<days>(std::chrono::system_clock::now());
+    auto today_secs = floor<std::chrono::seconds>(today_days);
+
+    // Return today's date by default
+    if (user_date.empty()) {
+        return today_secs.time_since_epoch().count();
+    }
+
+    // Parse date provided by user.
+    // If date parsing fails, then today's date is returned.
+    std::istringstream in{user_date};
+    sys_seconds tp = today_secs;
+    in >> parse("%d/%m/%Y", tp);
+    auto date_secs = floor<std::chrono::seconds>(tp);
+    return date_secs.time_since_epoch().count();
+}
 
 /**
  * Creates new Transaction from subcommand Add options.
@@ -38,9 +71,7 @@ static bool setup_new_transaction(const SubcommandAddOptions& opt,
     }
 
     transaction->note = opt.note;
-
-    // Current time
-    transaction->date = std::time(nullptr);
+    transaction->date = get_date_in_seconds(opt.date);
 
     return true;
 }
@@ -63,9 +94,11 @@ static void run_subcommand_add(const SubcommandAddOptions& opt) {
 void setup_subcommand_add(CLI::App *app) {
     auto opt = std::make_shared<SubcommandAddOptions>();
     auto sub = app->add_subcommand("add", "Add new Transactions");
-    sub->add_option("-c,--cat", opt->cat_id, "Category ID for new Transaction");
     sub->add_option("amount", opt->amount, "Transaction amount")->required();
+    sub->add_option("-c,--cat", opt->cat_id, "Category ID for new Transaction");
     sub->add_option("-n, --note", opt->note, "Note about Transaction");
+    sub->add_option("-d, --date", opt->date,
+            "Date of Transaction, today by default");
     sub->callback([opt]() { run_subcommand_add(*opt); });
 }
 

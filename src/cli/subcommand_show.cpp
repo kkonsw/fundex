@@ -1,5 +1,6 @@
 // Copyright 2021 Kuznetsov Konstantin
 
+#include <algorithm>
 #include <memory>
 
 #include "cli/subcommand_show.h"
@@ -25,6 +26,8 @@ static void run_subcommand_show(const SubcommandShowOptions& opt) {
     int n = opt.num_records;
     if (n >= 0) {
         auto last_transactions = transactions.get_transactions(n);
+        // Reverse vector to print more recent transactions last
+        std::reverse(last_transactions.begin(), last_transactions.end());
         print_transactions(last_transactions);
     }
 }
