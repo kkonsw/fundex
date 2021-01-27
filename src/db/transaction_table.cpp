@@ -45,9 +45,11 @@ std::vector<Transaction> TransactionTable::get_transactions(
             return db->get_all<Transaction>(
                     sqlite_orm::order_by(&Transaction::id).desc());
         case SortOrder::date:
+            return db->get_all<Transaction>(
+                    sqlite_orm::order_by(&Transaction::date));
         case SortOrder::date_desc:
-            throw std::runtime_error(
-                    "Passed sort order value is not supported!");
+            return db->get_all<Transaction>(
+                    sqlite_orm::order_by(&Transaction::date).desc());
         default:
             throw std::runtime_error("Unknown sort order!");
     }
