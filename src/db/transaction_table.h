@@ -39,7 +39,7 @@ enum class SortOrder {
      * Retrieve Transactions by date.
      *
      * @note
-     *   most recent Transactions
+     *   oldest Transactions
      */
     date,
 
@@ -47,7 +47,7 @@ enum class SortOrder {
      * Retrieve Transactions by date.
      *
      * @note
-     *   oldest Transactions
+     *   most recent Transactions
      */
     date_desc,
 };
@@ -62,7 +62,7 @@ class TransactionTable : public Table<Transaction> {
 
     /**
      * Function to retrieve n Transactions from Database.
-     * By default, retrieves n last added Transactions.
+     * By default, retrieves n most recent Transactions.
      *
      * @param n
      *   Number of Transactions.
@@ -70,7 +70,7 @@ class TransactionTable : public Table<Transaction> {
      *   Sort Order for retrieved Transactions.
      */
     std::vector<Transaction> get_transactions(int n,
-            SortOrder order = SortOrder::id_desc) const;
+            SortOrder order = SortOrder::date_desc) const;
 
     /**
      * Function to retrieve all Transactions from Database.

@@ -27,9 +27,13 @@ std::vector<Transaction> TransactionTable::get_transactions(int n,
                     sqlite_orm::order_by(&Transaction::id).desc(),
                     sqlite_orm::limit(n));
         case SortOrder::date:
+            return db->get_all<Transaction>(
+                    sqlite_orm::order_by(&Transaction::date),
+                    sqlite_orm::limit(n));
         case SortOrder::date_desc:
-            throw std::runtime_error(
-                    "Passed sort order value is not supported!");
+            return db->get_all<Transaction>(
+                    sqlite_orm::order_by(&Transaction::date).desc(),
+                    sqlite_orm::limit(n));
         default:
             throw std::runtime_error("Unknown sort order!");
     }

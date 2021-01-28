@@ -55,6 +55,52 @@ TEST_CASE_METHOD(TransactionsFixture,
     REQUIRE(last[0].amount == required_amount);
 }
 
+TEST_CASE_METHOD(DateTransactionsFixture,
+        "Get most recent Transaction from Database",
+        "[Transactions Table]") {
+    // Retrieve most recent Transaction from Database
+    auto recent = transactions.get_transactions(1,
+            fundex::SortOrder::date_desc);
+    REQUIRE(recent.size() == 1);
+    int required_amount = 4;
+    REQUIRE(recent[0].amount == required_amount);
+}
+
+TEST_CASE_METHOD(DateTransactionsFixture,
+        "Get most recent Transactions from Database",
+        "[Transactions Table]") {
+    // Retrieve most recent Transactions from Database
+    size_t n = 2;
+    auto recent = transactions.get_transactions(n,
+            fundex::SortOrder::date_desc);
+    REQUIRE(recent.size() == n);
+    REQUIRE(recent[0].amount == 4);
+    REQUIRE(recent[1].amount == 3);
+}
+
+TEST_CASE_METHOD(DateTransactionsFixture,
+        "Get oldest Transaction from Database",
+        "[Transactions Table]") {
+    // Retrieve oldest Transaction from Database
+    auto recent = transactions.get_transactions(1,
+            fundex::SortOrder::date);
+    REQUIRE(recent.size() == 1);
+    int required_amount = 1;
+    REQUIRE(recent[0].amount == required_amount);
+}
+
+TEST_CASE_METHOD(DateTransactionsFixture,
+        "Get oldest Transactions from Database",
+        "[Transactions Table]") {
+    // Retrieve oldest Transactions from Database
+    size_t n = 2;
+    auto recent = transactions.get_transactions(n,
+            fundex::SortOrder::date);
+    REQUIRE(recent.size() == n);
+    REQUIRE(recent[0].amount == 1);
+    REQUIRE(recent[1].amount == 2);
+}
+
 TEST_CASE_METHOD(TransactionsFixture,
         "Get all Transactions from Database sorted by id",
         "[Transactions Table]") {
@@ -85,15 +131,9 @@ TEST_CASE_METHOD(TransactionsFixture,
     }
 }
 
-TEST_CASE_METHOD(CLIFixture,
+TEST_CASE_METHOD(DateTransactionsFixture,
         "Get all Transactions from Database sorted by date",
         "[Transactions Table]") {
-    // Add Transactions with different dates
-    launch_app({"add", "4", "--date", "21/01/2021"});
-    launch_app({"add", "1", "--date", "01/01/2020"});
-    launch_app({"add", "2", "--date", "01/06/2020"});
-    launch_app({"add", "3", "--date", "31/12/2020"});
-
     // Retrieve all Transactions from Database
     auto all = transactions.get_transactions(fundex::SortOrder::date);
     size_t required_size = 4;
@@ -106,23 +146,17 @@ TEST_CASE_METHOD(CLIFixture,
     }
 }
 
-TEST_CASE_METHOD(CLIFixture,
+TEST_CASE_METHOD(DateTransactionsFixture,
         "Get all Transactions from Database sorted by date in descending order",
         "[Transactions Table]") {
-    // Add Transactions with different dates
-    launch_app({"add", "1", "--date", "21/01/2021"});
-    launch_app({"add", "4", "--date", "01/01/2020"});
-    launch_app({"add", "3", "--date", "01/06/2020"});
-    launch_app({"add", "2", "--date", "31/12/2020"});
-
     // Retrieve all Transactions from Database
     auto all = transactions.get_transactions(fundex::SortOrder::date_desc);
     size_t required_size = 4;
     REQUIRE(all.size() == required_size);
 
     // Check for correct amount
-    for (size_t i = 1; i <= all.size(); ++i) {
-        int required_amount = i;
-        REQUIRE(all[i - 1].amount == required_amount);
+    for (size_t i = 0; i < all.size(); ++i) {
+        int required_amount = 4 - i;
+        REQUIRE(all[i].amount == required_amount);
     }
 }
