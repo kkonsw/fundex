@@ -39,6 +39,13 @@ void setup_subcommand_show(CLI::App *app) {
             "Show all Transactions");
     sub->add_option("-n,--num_records", opt->num_records,
             "Number of records to show")->excludes(show_all);
+
+    std::string sort_help_msg = "Specify how to sort Transactions\n"
+        "\tid       show first added Transactions\n"
+        "\tid_d     show last added Transactions\n"
+        "\tdate     show oldest Transactions\n"
+        "\tdate_d   show most recent Transactions\n";
+    sub->add_option("-s,--sort", opt->sort_order, sort_help_msg);
     sub->callback([opt]() { run_subcommand_show(*opt); });
 }
 

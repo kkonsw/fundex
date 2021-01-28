@@ -20,7 +20,7 @@ namespace fundex {
  * for date provided by user. By default, returns today's date.
  *
  * @param user_date
- *   Date provided by user. Current required format is %d/%m/%Y.
+ *   Date provided by user. Current required format is dd/mm/yyyy.
  * @return
  *   Date as Unix Time (number of seconds since January 1, 1970).
  */
@@ -97,10 +97,12 @@ void setup_subcommand_add(CLI::App *app) {
     auto opt = std::make_shared<SubcommandAddOptions>();
     auto sub = app->add_subcommand("add", "Add new Transactions");
     sub->add_option("amount", opt->amount, "Transaction amount")->required();
-    sub->add_option("-c,--cat", opt->cat_id, "Category ID for new Transaction");
+    sub->add_option("-c,--cat", opt->cat_id, "Category ID for new Transaction\n"
+            "\tUse --list_cat option to view possible Categories");
     sub->add_option("-n, --note", opt->note, "Note about Transaction");
     sub->add_option("-d, --date", opt->date,
-            "Date of Transaction, today by default");
+            "Date of Transaction, today by default\n"
+            "\tCurrent format is dd/mm/yyyy");
     sub->callback([opt]() { run_subcommand_add(*opt); });
 }
 

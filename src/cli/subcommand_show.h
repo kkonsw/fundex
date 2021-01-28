@@ -8,6 +8,8 @@
 #ifndef SRC_CLI_SUBCOMMAND_SHOW_H_
 #define SRC_CLI_SUBCOMMAND_SHOW_H_
 
+#include <string>
+
 #include <CLI11/CLI11.hpp>
 
 namespace fundex {
@@ -25,6 +27,11 @@ struct SubcommandShowOptions {
      * Flag to show all Transactions.
      */
     bool show_all;
+
+    /**
+     * Option to specify how to sort Transactions.
+     */
+    std::string sort_order;
 };
 
 /**
