@@ -24,6 +24,13 @@ TEST_CASE_METHOD(CLIFixture, "Add Transaction",
     REQUIRE(transaction.cat_id == nullptr);
 }
 
+TEST_CASE_METHOD(CLIFixture,
+        "Adding Transaction throws when amount is negative",
+        "[Add Transactions]") {
+    // Add new Transaction with negative amount
+    REQUIRE_THROWS(launch_app({"add", "-5"}));
+}
+
 TEST_CASE_METHOD(CLIFixture, "Add Transaction with note",
         "[Add Transactions]") {
     REQUIRE(transactions.size() == 0);

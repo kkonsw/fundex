@@ -7,6 +7,13 @@
 int main(int argc, char *argv[]) {
     CLI::App app{"fundex - CLI expense tracker"};
     fundex::setup_all_options(&app);
-    CLI11_PARSE(app, argc, argv);
+    try {
+        CLI11_PARSE(app, argc, argv);
+    }
+    catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return -1;
+    }
+
     return 0;
 }

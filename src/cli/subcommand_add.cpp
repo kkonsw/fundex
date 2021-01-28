@@ -4,6 +4,7 @@
 
 #include <ctime>
 #include <chrono>
+#include <stdexcept>
 #include <string>
 #include <sstream>
 #include <memory>
@@ -52,14 +53,15 @@ int get_date_in_seconds(const std::string& user_date = "") {
  * @param transaction
  *   Pointer to new Transaction.
  * @return
- *   True, if new Transaction was created successfully,
- *   false otherwise.
+ *   True, if new Transaction was created successfully.
+ * @note
+ *   Throws exception with invalid amount (<= 0)
  */
 static bool setup_new_transaction(const SubcommandAddOptions& opt,
         Transaction *transaction) {
     if (opt.amount <= 0) {
         // User did not provide valid Transaction amount
-        return false;
+        throw std::runtime_error("Invalid Transaction amount");
     }
     transaction->amount = opt.amount;
 
