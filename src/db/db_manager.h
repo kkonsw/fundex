@@ -26,7 +26,7 @@ class DBManager {
       *
       * @param db_name
       *   Database name.
-      * @warning
+      * @note
       *   Static instance of DB Manager is created
       *   when this function is called the first time.
       * @return

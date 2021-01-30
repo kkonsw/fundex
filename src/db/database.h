@@ -17,7 +17,6 @@ namespace fundex {
 
 /**
  * Represents Transaction's Category in Database.
- *
  */
 struct Category {
     /**

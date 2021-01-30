@@ -9,7 +9,6 @@ namespace fundex {
 
 /**
  * Function that runs code after Rm (Remove) subcommand is issued.
- *
  */
 static void run_subcommand_rm(const SubcommandRmOptions& opt) {
     if (opt.remove_all) {

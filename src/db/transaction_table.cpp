@@ -1,5 +1,7 @@
 // Copyright 2021 Kuznetsov Konstantin
 
+#include <sqlite_orm/sqlite_orm.h>
+
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -15,48 +17,32 @@ TransactionTable::TransactionTable():
 TransactionTable::~TransactionTable() {
 }
 
-std::vector<Transaction> TransactionTable::get_transactions(int n,
-        SortOrder order) const {
-    switch (order) {
-        case SortOrder::id:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::id),
-                    sqlite_orm::limit(n));
-        case SortOrder::id_desc:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::id).desc(),
-                    sqlite_orm::limit(n));
-        case SortOrder::date:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::date),
-                    sqlite_orm::limit(n));
-        case SortOrder::date_desc:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::date).desc(),
-                    sqlite_orm::limit(n));
-        default:
-            throw std::runtime_error("Unknown sort order!");
-    }
-}
-
 std::vector<Transaction> TransactionTable::get_transactions(
-        SortOrder order) const {
+        SortOrder order, int n) const {
+    auto order_by = sqlite_orm::order_by(&Transaction::id);
     switch (order) {
         case SortOrder::id:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::id));
+            order_by = sqlite_orm::order_by(&Transaction::id);
+            break;
         case SortOrder::id_desc:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::id).desc());
+            order_by = sqlite_orm::order_by(&Transaction::id).desc();
+            break;
         case SortOrder::date:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::date));
+            order_by = sqlite_orm::order_by(&Transaction::date);
+            break;
         case SortOrder::date_desc:
-            return db->get_all<Transaction>(
-                    sqlite_orm::order_by(&Transaction::date).desc());
+            order_by = sqlite_orm::order_by(&Transaction::date).desc();
+            break;
         default:
             throw std::runtime_error("Unknown sort order!");
     }
+
+    if (n != -1) {
+        return db->get_all<Transaction>(order_by, sqlite_orm::limit(n));
+    }
+
+    // Return all Transactions
+    return db->get_all<Transaction>(order_by);
 }
 
 }  // namespace fundex

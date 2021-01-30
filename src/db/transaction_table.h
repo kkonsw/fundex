@@ -61,26 +61,16 @@ class TransactionTable : public Table<Transaction> {
     ~TransactionTable();
 
     /**
-     * Function to retrieve n Transactions from Database.
-     * By default, retrieves n most recent Transactions.
+     * Function to retrieve Transactions from Database.
+     * By default, retrieves Transactions sorted by Transaction::date.
      *
      * @param n
      *   Number of Transactions.
      * @param order
      *   Sort Order for retrieved Transactions.
      */
-    std::vector<Transaction> get_transactions(int n,
-            SortOrder order = SortOrder::date_desc) const;
-
-    /**
-     * Function to retrieve all Transactions from Database.
-     * By default, retrieves Transactions sorted by Transaction::date.
-     *
-     * @param order
-     *   Sort Order for retrieved Transactions.
-     */
     std::vector<Transaction> get_transactions(
-            SortOrder order = SortOrder::date) const;
+            SortOrder order = SortOrder::date_desc, int n = -1) const;
 };
 
 };  // namespace fundex

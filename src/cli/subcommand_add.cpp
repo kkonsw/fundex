@@ -24,7 +24,7 @@ namespace fundex {
  * @return
  *   Date as Unix Time (number of seconds since January 1, 1970).
  */
-int get_date_in_seconds(const std::string& user_date = "") {
+static int get_date_in_seconds(const std::string& user_date = "") {
     using namespace date;
 
     // Get today's date in seconds

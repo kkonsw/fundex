@@ -21,7 +21,7 @@ namespace fundex {
  * @note
  *   Throws exception if user passed invalid option.
  */
-SortOrder get_sort_order(const std::string &sort_option) {
+static SortOrder get_sort_order(const std::string &sort_option) {
     SortOrder sort_order;
     std::unordered_map<std::string, SortOrder> map = {
         {"first", SortOrder::id},
@@ -60,7 +60,7 @@ static void run_subcommand_show(const SubcommandShowOptions& opt) {
     // Print n transactions
     int n = opt.num_records;
     if (n >= 0) {
-        auto last_transactions = transactions.get_transactions(n, sort_order);
+        auto last_transactions = transactions.get_transactions(sort_order, n);
         print_transactions(last_transactions);
     }
 }

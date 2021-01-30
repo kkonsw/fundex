@@ -10,7 +10,7 @@ TEST_CASE_METHOD(TransactionsFixture,
         "[Transactions Table]") {
     // Retrieve n last added Transactions from Database
     size_t n = 3;
-    auto last = transactions.get_transactions(n, fundex::SortOrder::id_desc);
+    auto last = transactions.get_transactions(fundex::SortOrder::id_desc, n);
     REQUIRE(last.size() == n);
 
     // Check for correct amount
@@ -24,7 +24,7 @@ TEST_CASE_METHOD(TransactionsFixture,
         "Get last added Transaction from Database",
         "[Transactions Table]") {
     // Retrieve last added Transaction from Database
-    auto last = transactions.get_transactions(1, fundex::SortOrder::id_desc);
+    auto last = transactions.get_transactions(fundex::SortOrder::id_desc, 1);
     REQUIRE(last.size() == 1);
     int required_amount = num_transactions;
     REQUIRE(last[0].amount == required_amount);
@@ -35,7 +35,7 @@ TEST_CASE_METHOD(TransactionsFixture,
         "[Transactions Table]") {
     // Retrieve n first added Transactions from Database
     size_t n = 3;
-    auto last = transactions.get_transactions(n, fundex::SortOrder::id);
+    auto last = transactions.get_transactions(fundex::SortOrder::id, n);
     REQUIRE(last.size() == n);
 
     // Check for correct amount
@@ -49,7 +49,7 @@ TEST_CASE_METHOD(TransactionsFixture,
         "Get first added Transaction from Database",
         "[Transactions Table]") {
     // Retrieve first added Transaction from Database
-    auto last = transactions.get_transactions(1, fundex::SortOrder::id);
+    auto last = transactions.get_transactions(fundex::SortOrder::id, 1);
     REQUIRE(last.size() == 1);
     int required_amount = 1;
     REQUIRE(last[0].amount == required_amount);
@@ -59,8 +59,8 @@ TEST_CASE_METHOD(DateTransactionsFixture,
         "Get most recent Transaction from Database",
         "[Transactions Table]") {
     // Retrieve most recent Transaction from Database
-    auto recent = transactions.get_transactions(1,
-            fundex::SortOrder::date_desc);
+    auto recent = transactions.get_transactions(
+            fundex::SortOrder::date_desc, 1);
     REQUIRE(recent.size() == 1);
     int required_amount = 4;
     REQUIRE(recent[0].amount == required_amount);
@@ -71,8 +71,8 @@ TEST_CASE_METHOD(DateTransactionsFixture,
         "[Transactions Table]") {
     // Retrieve most recent Transactions from Database
     size_t n = 2;
-    auto recent = transactions.get_transactions(n,
-            fundex::SortOrder::date_desc);
+    auto recent = transactions.get_transactions(
+            fundex::SortOrder::date_desc, n);
     REQUIRE(recent.size() == n);
     REQUIRE(recent[0].amount == 4);
     REQUIRE(recent[1].amount == 3);
@@ -82,8 +82,7 @@ TEST_CASE_METHOD(DateTransactionsFixture,
         "Get oldest Transaction from Database",
         "[Transactions Table]") {
     // Retrieve oldest Transaction from Database
-    auto recent = transactions.get_transactions(1,
-            fundex::SortOrder::date);
+    auto recent = transactions.get_transactions(fundex::SortOrder::date, 1);
     REQUIRE(recent.size() == 1);
     int required_amount = 1;
     REQUIRE(recent[0].amount == required_amount);
@@ -94,8 +93,8 @@ TEST_CASE_METHOD(DateTransactionsFixture,
         "[Transactions Table]") {
     // Retrieve oldest Transactions from Database
     size_t n = 2;
-    auto recent = transactions.get_transactions(n,
-            fundex::SortOrder::date);
+    auto recent = transactions.get_transactions(
+            fundex::SortOrder::date, n);
     REQUIRE(recent.size() == n);
     REQUIRE(recent[0].amount == 1);
     REQUIRE(recent[1].amount == 2);
