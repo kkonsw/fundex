@@ -17,26 +17,28 @@ TransactionTable::TransactionTable():
 TransactionTable::~TransactionTable() {
 }
 
-std::vector<Transaction> TransactionTable::get_transactions(
-        SortOrder order, int n) const {
-    auto order_by = sqlite_orm::order_by(&Transaction::id);
+auto TransactionTable::get_sort_order(SortOrder order) const {
     switch (order) {
         case SortOrder::id:
-            order_by = sqlite_orm::order_by(&Transaction::id);
-            break;
+            return sqlite_orm::order_by(&Transaction::id);
         case SortOrder::id_desc:
-            order_by = sqlite_orm::order_by(&Transaction::id).desc();
-            break;
+            return sqlite_orm::order_by(&Transaction::id).desc();
         case SortOrder::date:
-            order_by = sqlite_orm::order_by(&Transaction::date);
-            break;
+            return sqlite_orm::order_by(&Transaction::date);
         case SortOrder::date_desc:
-            order_by = sqlite_orm::order_by(&Transaction::date).desc();
-            break;
+            return sqlite_orm::order_by(&Transaction::date).desc();
+        case SortOrder::amount:
+            return sqlite_orm::order_by(&Transaction::amount);
+        case SortOrder::amount_desc:
+            return sqlite_orm::order_by(&Transaction::amount).desc();
         default:
             throw std::runtime_error("Unknown sort order!");
     }
+}
 
+std::vector<Transaction> TransactionTable::get_transactions(
+        SortOrder order, int n) const {
+    auto order_by = get_sort_order(order);
     if (n != -1) {
         return db->get_all<Transaction>(order_by, sqlite_orm::limit(n));
     }

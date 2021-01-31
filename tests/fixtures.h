@@ -94,17 +94,34 @@ class CLIFixture : public DBFixture {
 /**
  * Adds Transactions with different dates to Database.
  */
-class DateTransactionsFixture : public CLIFixture {
+class DatesFixture : public CLIFixture {
  public:
-     DateTransactionsFixture() {
+     DatesFixture() {
          launch_app({"add", "4", "--date", "21/01/2021"});
          launch_app({"add", "2", "--date", "01/06/2020"});
          launch_app({"add", "1", "--date", "01/01/2020"});
          launch_app({"add", "3", "--date", "31/12/2020"});
      }
 
-     ~DateTransactionsFixture() {
+     ~DatesFixture() {
      }
 };
+
+/**
+ * Adds Transactions with different expenses to Database.
+ */
+class ExpensesFixture : public CLIFixture {
+ public:
+     ExpensesFixture() {
+         launch_app({"add", "4"});
+         launch_app({"add", "2"});
+         launch_app({"add", "1"});
+         launch_app({"add", "3"});
+     }
+
+     ~ExpensesFixture() {
+     }
+};
+
 
 #endif  // TESTS_FIXTURES_H_

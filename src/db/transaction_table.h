@@ -20,36 +20,52 @@ namespace fundex {
  */
 enum class SortOrder {
     /**
-     * Retrieve Transactions by id.
+     * To retrieve Transactions sorted by id.
      *
      * @note
-     *   first added Transactions
+     *   First added Transactions.
      */
     id,
 
     /**
-     * Retrieve Transactions by id.
+     * To retrieve Transactions sorted by id.
      *
      * @note
-     *   last added Transactions
+     *   Last added Transactions.
      */
     id_desc,
 
     /**
-     * Retrieve Transactions by date.
+     * To retrieve Transactions sorted by date.
      *
      * @note
-     *   oldest Transactions
+     *   Oldest Transactions.
      */
     date,
 
     /**
-     * Retrieve Transactions by date.
+     * To retrieve Transactions sorted by date.
      *
      * @note
-     *   most recent Transactions
+     *   Most recent Transactions.
      */
     date_desc,
+
+    /**
+     * To retrieve Transactions sorted by amount.
+     *
+     * @note
+     *   Cheapest Transactions.
+     */
+    amount,
+
+    /**
+     * To retrieve Transactions sorted by amount.
+     *
+     * @note
+     *   Most expensive Transactions.
+     */
+    amount_desc,
 };
 
 /**
@@ -71,7 +87,14 @@ class TransactionTable : public Table<Transaction> {
      */
     std::vector<Transaction> get_transactions(
             SortOrder order = SortOrder::date_desc, int n = -1) const;
+
+ private:
+    /**
+     * Returns sqlite_orm::order_by clause based on SortOrder parameter.
+     */
+    auto get_sort_order(SortOrder order) const;
 };
+
 
 };  // namespace fundex
 

@@ -27,7 +27,9 @@ static SortOrder get_sort_order(const std::string &sort_option) {
         {"first", SortOrder::id},
         {"last", SortOrder::id_desc},
         {"old", SortOrder::date},
-        {"new", SortOrder::date_desc}
+        {"new", SortOrder::date_desc},
+        {"low", SortOrder::amount},
+        {"high", SortOrder::amount_desc}
     };
 
     auto it = map.find(sort_option);
