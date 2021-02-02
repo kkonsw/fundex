@@ -12,61 +12,9 @@
 
 #include "db/database.h"
 #include "db/table.h"
+#include "db/transaction_filter.h"
 
 namespace fundex {
-
-/**
- * Various ways to retrieve sorted Transactions from Database.
- */
-enum class SortOrder {
-    /**
-     * To retrieve Transactions sorted by id.
-     *
-     * @note
-     *   First added Transactions.
-     */
-    id,
-
-    /**
-     * To retrieve Transactions sorted by id.
-     *
-     * @note
-     *   Last added Transactions.
-     */
-    id_desc,
-
-    /**
-     * To retrieve Transactions sorted by date.
-     *
-     * @note
-     *   Oldest Transactions.
-     */
-    date,
-
-    /**
-     * To retrieve Transactions sorted by date.
-     *
-     * @note
-     *   Most recent Transactions.
-     */
-    date_desc,
-
-    /**
-     * To retrieve Transactions sorted by amount.
-     *
-     * @note
-     *   Cheapest Transactions.
-     */
-    amount,
-
-    /**
-     * To retrieve Transactions sorted by amount.
-     *
-     * @note
-     *   Most expensive Transactions.
-     */
-    amount_desc,
-};
 
 /**
  * ORM for Transaction table.
@@ -78,15 +26,15 @@ class TransactionTable : public Table<Transaction> {
 
     /**
      * Function to retrieve Transactions from Database.
-     * By default, retrieves Transactions sorted by Transaction::date.
      *
      * @param n
      *   Number of Transactions.
-     * @param order
-     *   Sort Order for retrieved Transactions.
+     * @param filter
+     *   Filter to get specific Transactions.
      */
     std::vector<Transaction> get_transactions(
-            SortOrder order = SortOrder::date_desc, int n = -1) const;
+            const TransactionFilter &filter = TransactionFilter(),
+            int n = -1) const;
 
  private:
     /**

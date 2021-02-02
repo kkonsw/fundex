@@ -12,6 +12,7 @@ Simple CLI Expense Tracker written with C++.
 | `Catch2`     | testing              |
 | `libfort`    | pretty tables        |
 | `CLI11`      | command line parsing |
+| `date`       | date and time library|
 
 ## Build
 

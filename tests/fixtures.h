@@ -10,6 +10,7 @@
 
 #include "cli/utilities.h"
 #include "db/db_manager.h"
+#include "db/transaction_filter.h"
 #include "db/transaction_table.h"
 #include "db/category_table.h"
 
@@ -46,6 +47,10 @@ class TransactionsFixture : public DBFixture {
                 fundex::Transaction transaction = {-1, 0, i, nullptr, "test"};
                 transactions.add(transaction);
             }
+
+            // Set up filters
+            filter_first.order = fundex::SortOrder::First;
+            filter_last.order = fundex::SortOrder::Last;
         }
 
     ~TransactionsFixture() {
@@ -56,6 +61,16 @@ class TransactionsFixture : public DBFixture {
      * Number of Transactions to add to Database.
      */
     int num_transactions;
+
+    /**
+     * Filter to retrieve first added Transactions.
+     */
+    fundex::TransactionFilter filter_first;
+
+    /**
+     * Filter to retrieve last Transactions.
+     */
+    fundex::TransactionFilter filter_last;
 };
 
 
@@ -101,10 +116,25 @@ class DatesFixture : public CLIFixture {
          launch_app({"add", "2", "--date", "01/06/2020"});
          launch_app({"add", "1", "--date", "01/01/2020"});
          launch_app({"add", "3", "--date", "31/12/2020"});
+
+         // Set up filters
+         filter_recent.order = fundex::SortOrder::Recent;
+         filter_oldest.order = fundex::SortOrder::Oldest;
      }
 
      ~DatesFixture() {
      }
+
+ protected:
+     /**
+      * Filter to retrieve most recent Transactions.
+      */
+     fundex::TransactionFilter filter_recent;
+
+     /**
+      * Filter to retrieve oldest Transactions.
+      */
+     fundex::TransactionFilter filter_oldest;
 };
 
 /**
@@ -117,10 +147,25 @@ class ExpensesFixture : public CLIFixture {
          launch_app({"add", "2"});
          launch_app({"add", "1"});
          launch_app({"add", "3"});
+
+         // Set up filters
+         filter_cheapest.order = fundex::SortOrder::Cheap;
+         filter_expensive.order = fundex::SortOrder::Expensive;
      }
 
      ~ExpensesFixture() {
      }
+
+ protected:
+     /**
+      * Filter to retrieve cheapest Transactions.
+      */
+     fundex::TransactionFilter filter_cheapest;
+
+     /**
+      * Filter to retrieve expensive Transactions.
+      */
+     fundex::TransactionFilter filter_expensive;
 };
 
 

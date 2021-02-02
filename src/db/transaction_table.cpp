@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "db/transaction_table.h"
+#include "db/transaction_filter.h"
 
 namespace fundex {
 
@@ -19,17 +20,17 @@ TransactionTable::~TransactionTable() {
 
 auto TransactionTable::get_sort_order(SortOrder order) const {
     switch (order) {
-        case SortOrder::id:
+        case SortOrder::First:
             return sqlite_orm::order_by(&Transaction::id);
-        case SortOrder::id_desc:
+        case SortOrder::Last:
             return sqlite_orm::order_by(&Transaction::id).desc();
-        case SortOrder::date:
+        case SortOrder::Oldest:
             return sqlite_orm::order_by(&Transaction::date);
-        case SortOrder::date_desc:
+        case SortOrder::Recent:
             return sqlite_orm::order_by(&Transaction::date).desc();
-        case SortOrder::amount:
+        case SortOrder::Cheap:
             return sqlite_orm::order_by(&Transaction::amount);
-        case SortOrder::amount_desc:
+        case SortOrder::Expensive:
             return sqlite_orm::order_by(&Transaction::amount).desc();
         default:
             throw std::runtime_error("Unknown sort order!");
@@ -37,8 +38,8 @@ auto TransactionTable::get_sort_order(SortOrder order) const {
 }
 
 std::vector<Transaction> TransactionTable::get_transactions(
-        SortOrder order, int n) const {
-    auto order_by = get_sort_order(order);
+        const TransactionFilter &filter, int n) const {
+    auto order_by = get_sort_order(filter.order);
     if (n != -1) {
         return db->get_all<Transaction>(order_by, sqlite_orm::limit(n));
     }

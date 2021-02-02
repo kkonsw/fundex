@@ -8,6 +8,7 @@
 #include "cli/subcommand_show.h"
 #include "db/transaction_table.h"
 #include "db/utilities.h"
+#include "db/transaction_filter.h"
 
 namespace fundex {
 
@@ -24,12 +25,12 @@ namespace fundex {
 static SortOrder get_sort_order(const std::string &sort_option) {
     SortOrder sort_order;
     std::unordered_map<std::string, SortOrder> map = {
-        {"first", SortOrder::id},
-        {"last", SortOrder::id_desc},
-        {"old", SortOrder::date},
-        {"new", SortOrder::date_desc},
-        {"low", SortOrder::amount},
-        {"high", SortOrder::amount_desc}
+        {"first", SortOrder::First},
+        {"last", SortOrder::Last},
+        {"old", SortOrder::Oldest},
+        {"new", SortOrder::Recent},
+        {"low", SortOrder::Cheap},
+        {"high", SortOrder::Expensive}
     };
 
     auto it = map.find(sort_option);
@@ -46,15 +47,19 @@ static SortOrder get_sort_order(const std::string &sort_option) {
  */
 static void run_subcommand_show(const SubcommandShowOptions& opt) {
     // Show most recent Transactions by default
-    SortOrder sort_order = SortOrder::date_desc;
+    SortOrder sort_order = SortOrder::Recent;
     if (!opt.sort_order.empty()) {
         sort_order = get_sort_order(opt.sort_order);
     }
 
+    // Create filter for Transactions
+    TransactionFilter filter;
+    filter.order = sort_order;
+
     // Print all transactions
     TransactionTable transactions;
     if (opt.show_all) {
-        auto all_transactions = transactions.get_transactions(sort_order);
+        auto all_transactions = transactions.get_transactions(filter);
         print_transactions(all_transactions);
         return;
     }
@@ -62,7 +67,7 @@ static void run_subcommand_show(const SubcommandShowOptions& opt) {
     // Print n transactions
     int n = opt.num_records;
     if (n >= 0) {
-        auto last_transactions = transactions.get_transactions(sort_order, n);
+        auto last_transactions = transactions.get_transactions(filter, n);
         print_transactions(last_transactions);
     }
 }
@@ -75,11 +80,13 @@ void setup_subcommand_show(CLI::App *app) {
     sub->add_option("-n,--num_records", opt->num_records,
             "Number of records to show")->excludes(show_all);
 
-    std::string sort_help_msg = "Specify how to sort Transactions\n"
+    std::string sort_help_msg = "Specify how to sort Transactions:\n"
         "\tfirst    show first added Transactions\n"
         "\tlast     show last added Transactions\n"
         "\told      show oldest Transactions\n"
-        "\tnew      show most recent Transactions\n";
+        "\tnew      show most recent Transactions\n"
+        "\thigh     show most expensive Transactions\n"
+        "\tlow      show cheapest Transactions\n";
     sub->add_option("-s,--sort", opt->sort_order, sort_help_msg);
     sub->callback([opt]() { run_subcommand_show(*opt); });
 }
